@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: start;
+}
+.input {
+  min-width: 250px;
+  cursor: pointer;
+}
+.btn {
+  display: inline-block;
+  min-width: 150px;
+  background-color: #000;
+  cursor: pointer;
+  padding: 10px 15px;
+  color: #fff;
+  border: 1px solid;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.btn:hover {
+  background-color: #fff;
+  color: #000;
+}

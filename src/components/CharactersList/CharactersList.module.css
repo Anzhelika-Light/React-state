@@ -1,0 +1,12 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+}
+.icon {
+  margin-left: 15px;
+  cursor: pointer;
+}
+.bold {
+  font-weight: bold;
+}

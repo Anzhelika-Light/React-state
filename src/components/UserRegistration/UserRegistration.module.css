@@ -1,0 +1,24 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+.wrapper {
+  display: flex;
+  gap: 30px;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.label {
+  margin-right: 20px;
+}
+.field {
+  min-width: 250px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}

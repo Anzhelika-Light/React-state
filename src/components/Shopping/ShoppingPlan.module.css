@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  gap: 70px;
+  justify-content: space-between;
+}
+.wrapper {
+  min-width: 500px;
+}
+.totalInfo {
+  text-align: left;
+}
+
+.totalName {
+  font-weight: bold;
+}

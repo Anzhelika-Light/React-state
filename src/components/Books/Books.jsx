@@ -1,0 +1,98 @@
+import { Component } from "react";
+import { nanoid } from "nanoid";
+import FormAddBook from "./FormAddBook";
+import BookList from "./BookList/BookList";
+import css from "./Books.module.css";
+
+class Books extends Component {
+  state = {
+    books: [],
+    filter: "",
+  };
+
+  addBook = (data) => {
+    if (this.isDublicate(data)) {
+      return alert(
+        `${data.title}. ${data.author} is already added to the list.`
+      );
+    }
+    const newBook = {
+      id: nanoid(),
+      ...data,
+    };
+
+    this.setState(({ books }) => ({
+      books: [...books, newBook],
+    }));
+  };
+
+  isDublicate({ title, author }) {
+    const { books } = this.state;
+    const normalizedTitle = title.toLowerCase();
+    const normalizedAuthor = author.toLowerCase();
+    const result = books.find(
+      (book) =>
+        book.title.toLowerCase() === normalizedTitle &&
+        book.author.toLowerCase() === normalizedAuthor
+    );
+    return result;
+  }
+
+  deleteBook = (bookId) => {
+    this.setState(({ books }) => {
+      const newBooks = books.filter((book) => book.id !== bookId);
+      return { books: newBooks };
+    });
+  };
+
+  getFilteredBooks() {
+    const { books, filter } = this.state;
+    // Якщо властивість фільтр порожня, то просто повертаємо усі книги, не проганяючи їх через фільтр
+    if (!filter) {
+      return books;
+    }
+    const normalizedFilter = filter.toLowerCase();
+    return books.filter(
+      ({ title, author }) =>
+        title.toLowerCase().includes(normalizedFilter) ||
+        author.toLowerCase().includes(normalizedFilter)
+    );
+  }
+
+  handleFilter = ({ target }) => {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  render() {
+    const { filter } = this.state;
+    const { addBook, deleteBook, handleFilter } = this;
+    const filteredBooks = this.getFilteredBooks();
+
+    return (
+      <div className={css.container}>
+        <h2 className={css.title}>My books</h2>
+        <div className={css.row}>
+          <div className={css.column}>
+            <FormAddBook onSubmit={addBook} />
+          </div>
+          <div className={css.column}>
+            <input
+              type="text"
+              name="filter"
+              onChange={handleFilter}
+              value={filter}
+              className={css.filter}
+              placeholder="Filter"
+            />
+            <BookList books={filteredBooks} deleteBook={deleteBook} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Books;
