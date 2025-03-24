@@ -10,6 +10,23 @@ class Books extends Component {
     filter: "",
   };
 
+  componentDidMount() {
+    // const books = JSON.parse(localStorage.getItem("books"));
+    // if (books?.length) {
+    //   // (books?.length) === books && books.length
+    //   this.setState({ books });
+    // }
+
+      fetch("https://jsonplaceholder.typicode.com/posts?_limit=10")
+        .then((response) => response.json())
+        .then((result) => this.setState({ books: result }));
+  }
+
+  // componentDidUpdate() {
+  //   const { books } = this.state;
+  //   localStorage.setItem("books", JSON.stringify(books));
+  // }
+
   addBook = (data) => {
     if (this.isDublicate(data)) {
       return alert(

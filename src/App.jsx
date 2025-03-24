@@ -32,6 +32,8 @@ import { ReactComponent as AddIcon } from "./icons/add.svg";
 import { PlayerApp } from "./components/PlayerApp/PlayerApp";
 import { Reader2 } from "./components/Reader2/Reader2";
 import Pokemon from "./components/Pokemon/Pokemon";
+import { MaterialApp } from "./components/Material/MaterialApp";
+import { FormsWithFormik } from "./components/FormsWithFormik/FormsWithFormik";
 
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
@@ -175,7 +177,7 @@ class App extends Component {
         {/* <Menu items={menuItems} /> */}
         {/* <ToggleButton text="Click me!" /> */}
         {/* <Vote /> */}
-        {/* <Books /> */}
+        <Books />
         {/* <Feedback /> */}
         {/* <PhoneBook /> */}
         {/* <AccordionItem /> */}
@@ -194,9 +196,15 @@ class App extends Component {
         {/* <Tabs items={tabs} /> */}
 
         {/* <PlayerApp /> */}
+
         {/* <Reader2 items={publications2} /> */}
-        <Pokemon />
-        <ToastContainer autoClose={3000} />
+
+        {/* <Pokemon />
+        <ToastContainer autoClose={3000} /> */}
+
+        {/* <MaterialApp /> */}
+
+        {/* <FormsWithFormik /> */}
       </>
     );
   }
