@@ -17,9 +17,9 @@ class Books extends Component {
     //   this.setState({ books });
     // }
 
-      fetch("https://jsonplaceholder.typicode.com/posts?_limit=10")
-        .then((response) => response.json())
-        .then((result) => this.setState({ books: result }));
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => response.json())
+      .then((result) => this.setState({ books: result }));
   }
 
   // componentDidUpdate() {
