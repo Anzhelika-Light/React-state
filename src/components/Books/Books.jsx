@@ -11,21 +11,23 @@ class Books extends Component {
   };
 
   componentDidMount() {
-    // const books = JSON.parse(localStorage.getItem("books"));
-    // if (books?.length) {
-    //   // (books?.length) === books && books.length
-    //   this.setState({ books });
-    // }
+    const books = JSON.parse(localStorage.getItem("books"));
+    if (books?.length) {
+      // (books?.length) === books && books.length // We checck that this is not null or an empty array
+      this.setState({ books });
+    }
 
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((result) => this.setState({ books: result }));
+    // fetch("https://jsonplaceholder.typicode.com/posts")
+    //   .then((response) => response.json())
+    //   .then((result) => this.setState({ books: result }));
   }
 
-  // componentDidUpdate() {
-  //   const { books } = this.state;
-  //   localStorage.setItem("books", JSON.stringify(books));
-  // }
+  componentDidUpdate(_, prevState) {
+    const { books } = this.state;
+    if (prevState.books.length !== books.length) {
+      localStorage.setItem("books", JSON.stringify(books));
+    }
+  }
 
   addBook = (data) => {
     if (this.isDublicate(data)) {
