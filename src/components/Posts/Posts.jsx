@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PostList from "./PostList";
 import { getPosts } from "../../services/posts-api";
 import css from "./Posts.module.css";
 
@@ -58,20 +59,15 @@ class Posts extends Component {
   render() {
     const { posts, isLoading, error } = this.state;
     const { loadMore } = this;
+    const isPosts = Boolean(posts.length);
 
-    const elements = posts.map(({ id, title }) => (
-      <li key={id} className={css.item}>
-        <p>{id}</p>
-        {title}
-      </li>
-    ));
     return (
       <>
         <h2 className={css.title}>Posts list</h2>
-        <ul className={css.list}>{elements}</ul>
+        {isPosts && <PostList items={posts} />}
         {isLoading && <p>...loading</p>}
         {error && <p>Failed to load posts. Try again later.</p>}
-        {Boolean(posts.length) && (
+        {isPosts && (
           <button type="button" onClick={loadMore}>
             Load more
           </button>

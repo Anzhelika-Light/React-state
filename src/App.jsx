@@ -35,6 +35,7 @@ import Pokemon from "./components/Pokemon/Pokemon";
 import { MaterialApp } from "./components/Material/MaterialApp";
 import { FormsWithFormik } from "./components/FormsWithFormik/FormsWithFormik";
 import Posts from "./components/Posts/Posts";
+import PostSearch from "./components/Posts/PostsSearch";
 
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
@@ -207,7 +208,8 @@ class App extends Component {
 
         {/* <FormsWithFormik /> */}
 
-        <Posts />
+        <PostSearch />
+        {/* <Posts /> */}
       </>
     );
   }
