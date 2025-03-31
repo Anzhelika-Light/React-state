@@ -1,7 +1,6 @@
 .filterLabel {
-  display: block;
   margin-bottom: 30px;
-  margin-left: 60px;
+  text-align: center;
 }
 
 .filterLabel:hover,
@@ -10,7 +9,6 @@
 }
 
 .filterInput {
-  display: block;
   width: 300px;
   border-radius: 4px;
   margin-top: 10px;

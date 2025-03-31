@@ -3,15 +3,15 @@ import css from "./Section.module.css";
 
 const Section = ({ title, children }) => {
   return (
-    <>
-      <h2 className="title">{title}</h2>
+    <div className={css.section}>
+      <h2 className={css.title}>{title}</h2>
       {children}
-    </>
+    </div>
   );
 };
 
 Section.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 

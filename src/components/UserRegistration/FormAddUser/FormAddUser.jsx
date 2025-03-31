@@ -8,6 +8,19 @@ class FormAddUser extends Component {
     password: "",
   };
 
+  componentDidMount() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      this.setState({ ...user });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState !== this.state) {
+      localStorage.setItem("user", JSON.stringify(this.state));
+    }
+  }
+
   handleChange = (e) => {
     const { name, value } = e.currentTarget;
     this.setState({
@@ -47,7 +60,7 @@ class FormAddUser extends Component {
         <label className={css.formGroup}>
           Email:
           <input
-            type="text"
+            type="email"
             className={css.field}
             value={email}
             name="email"
@@ -57,7 +70,7 @@ class FormAddUser extends Component {
         <label className={css.formGroup}>
           Password:
           <input
-            type="text"
+            type="password"
             className={css.field}
             value={password}
             name="password"

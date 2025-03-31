@@ -1,9 +1,25 @@
 .contactsList {
-  margin-left: 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
-.contactList__item {
-  margin: 10px;
+.contactsList__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.contactsList__container {
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.contactsList__item {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 30px;
 }
 
 .contactsList__name {
@@ -17,6 +33,9 @@
 }
 
 .contactsList__btn {
+  display: block;
+  /* width: 100px;
+  height: 30px; */
   padding: 4px 10px 4px;
   font-weight: 600;
   background-color: red;
@@ -37,7 +56,10 @@
   cursor: pointer;
 }
 
+.contactsList__iconDelete {
+  display: inline-block;
+}
 .contactsList__icon {
   display: inline-block;
-  margin-left: 6px;
+  margin-right: 6px;
 }

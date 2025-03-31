@@ -181,7 +181,7 @@ class App extends Component {
         {/* <Vote /> */}
         {/* <Books /> */}
         {/* <Feedback /> */}
-        {/* <PhoneBook /> */}
+        {/* <PhoneBook showModal={showModal} onClose={this.toggleModal} /> */}
         {/* <AccordionItem /> */}
         {/* <AccordionOption1 accordionItems={accordionItems} /> */}
         {/* <AccordionOption2 accordionItems={accordionItems} /> */}

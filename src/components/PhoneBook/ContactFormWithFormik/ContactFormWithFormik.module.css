@@ -5,10 +5,13 @@
   width: 100%;
   text-align: center;
 }
-
+.form_fieldWrapper {
+  display: flex;
+  gap: 10px;
+}
 .form__label {
   display: block;
-  margin-bottom: 10px;
+  width: 20%;
   text-align: left;
 }
 
@@ -20,7 +23,6 @@
 .form__input {
   display: block;
   width: 100%;
-  margin-top: 10px;
   padding: 3px 5px;
   border-radius: 4px;
 }
@@ -34,9 +36,12 @@
   -moz-box-shadow: 10px 10px 18px 0px rgba(36, 31, 36, 1);
   box-shadow: 10px 10px 18px 0px rgba(36, 31, 36, 1);
 }
-
+.error {
+  display: block;
+  color: red;
+}
 .form__btn {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 8px 20px 8px 30px;
   background-color: rgb(37, 131, 22);
   color: beige;

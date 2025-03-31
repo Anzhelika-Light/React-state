@@ -3,7 +3,13 @@ import ContactForm from "./ContactForm";
 import Section from "./Section";
 import ContactList from "./ContactList";
 import Filter from "./Filter";
+import Modal from "../Modal";
+import IconButton from "../IconButton";
+import { ReactComponent as AddIcon } from "../../icons/add.svg";
+import { TiUserAdd } from "react-icons/ti";
 import { nanoid } from "nanoid";
+import ContactFormWithFormik from "./ContactFormWithFormik/ContactFormWithFormik";
+import css from "./PhoneBook.module.css";
 
 class PhoneBook extends Component {
   state = {
@@ -16,6 +22,21 @@ class PhoneBook extends Component {
     filter: "",
   };
 
+  componentDidMount() {
+    const contacts = localStorage.getItem("contacts");
+    const parsedContacts = JSON.parse(contacts);
+    if (parsedContacts?.length) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+    }
+  }
+
   addContact = (data) => {
     const newContact = { id: nanoid(), ...data };
 
@@ -24,6 +45,7 @@ class PhoneBook extends Component {
       : this.setState(({ contacts }) => ({
           contacts: [newContact, ...contacts],
         }));
+    this.props.onClose();
   };
 
   isDublicate(data) {
@@ -59,13 +81,25 @@ class PhoneBook extends Component {
     const { filter } = this.state;
     const { addContact, deleteContact, changeFilter, getVisibleContacts } =
       this;
+    const { showModal, onClose } = this.props;
     const visibleContacts = getVisibleContacts();
 
     return (
       <>
-        <Section title="PhoneBook">
-          <ContactForm onSubmit={addContact} />
-        </Section>
+        <h1>Phonebook</h1>
+        {/* <ContactForm onSubmit={addContact} /> */}
+        <IconButton onClick={this.props.onClose}>
+          {/* <AddIcon fill="white" width="40" height="40" /> */}
+          <TiUserAdd className={css.icon} />
+        </IconButton>
+        {showModal && (
+          <Modal onClose={onClose}>
+            <Section>
+              <ContactFormWithFormik onSubmit={addContact} />
+            </Section>
+          </Modal>
+        )}
+
         <Section title="Contacts">
           <Filter value={filter} onChange={changeFilter} />
           {this.state.contacts.length !== 0 ? (

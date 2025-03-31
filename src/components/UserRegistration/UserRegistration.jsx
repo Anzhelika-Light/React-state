@@ -10,6 +10,18 @@ class UserRegistration extends Component {
     filter: "",
   };
 
+  componentDidMount() {
+    const users = JSON.parse(localStorage.getItem("users"));
+    if (users?.length) this.setState({ users });
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { users } = this.state;
+    if (users !== prevState.users) {
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+  }
+
   addUser = (data) => {
     const newUser = { id: nanoid(), ...data };
     this.setState(({ users }) => ({
@@ -30,27 +42,40 @@ class UserRegistration extends Component {
     });
   };
 
-  getVisisbleUsers = (e) => {};
+  getVisibleUsers = (e) => {
+    const { users, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    const result = users.filter(
+      ({ name, email }) =>
+        name.toLowerCase().includes(normalizedFilter) ||
+        email.toLowerCase().includes(normalizedFilter)
+    );
+    return result;
+  };
 
   render() {
-    const { users, filter } = this.state;
+    const { filter } = this.state;
     const { addUser, deleteUser, handleFilter } = this;
+    const visibleUsers = this.getVisibleUsers();
 
     return (
       <div className={css.container}>
         <h1 className={css.title}>Registration form</h1>
         <div className={css.wrapper}>
           <FormAddUser onSubmit={addUser} />
-          <label>
-            Search for user:
-            <input
-              type="text"
-              name="filter"
-              onChange={handleFilter}
-              value={filter}
-            />
-          </label>
-          <UserInfo users={users} deleteUser={deleteUser} />
+          <div>
+            <label>
+              Search for user:
+              <input
+                type="text"
+                name="filter"
+                onChange={handleFilter}
+                value={filter}
+                className={css.filter}
+              />
+            </label>
+            <UserInfo users={visibleUsers} deleteUser={deleteUser} />
+          </div>
         </div>
       </div>
     );

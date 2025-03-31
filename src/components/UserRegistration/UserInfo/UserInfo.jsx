@@ -32,7 +32,7 @@ const UserInfo = ({ users = [], deleteUser }) => {
   return (
     <div>
       <h2 className={css.title}>User Data</h2>
-      <ol className={css.list}>{elements}</ol>
+      {Boolean(users.length) && <ol className={css.list}>{elements}</ol>}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import css from "./Filter.module.css";
 const Filter = ({ value, onChange }) => {
   return (
     <label className={css.filterLabel}>
-      Find contacts by name
+      <p>Find contacts by name</p>
       <input
         className={css.filterInput}
         type="text"
