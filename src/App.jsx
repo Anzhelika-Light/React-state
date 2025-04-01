@@ -36,6 +36,7 @@ import { MaterialApp } from "./components/Material/MaterialApp";
 import { FormsWithFormik } from "./components/FormsWithFormik/FormsWithFormik";
 import Posts from "./components/Posts/Posts";
 import PostSearch from "./components/Posts/PostsSearch";
+import Albums from "./components/Albums/Albums";
 
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
@@ -208,8 +209,10 @@ class App extends Component {
 
         {/* <FormsWithFormik /> */}
 
-        <PostSearch />
+        {/* <PostSearch /> */}
         {/* <Posts /> */}
+
+        <Albums />
       </>
     );
   }
