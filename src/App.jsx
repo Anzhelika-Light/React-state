@@ -37,6 +37,7 @@ import { FormsWithFormik } from "./components/FormsWithFormik/FormsWithFormik";
 import Posts from "./components/Posts/Posts";
 import PostSearch from "./components/Posts/PostsSearch";
 import Albums from "./components/Albums/Albums";
+import CharactersSearch from "./components/CharactersSearch/CharactersSearch";
 
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
@@ -212,7 +213,8 @@ class App extends Component {
         {/* <PostSearch /> */}
         {/* <Posts /> */}
 
-        <Albums />
+        {/* <Albums /> */}
+        <CharactersSearch />
       </>
     );
   }
