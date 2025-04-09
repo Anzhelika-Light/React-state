@@ -38,6 +38,7 @@ import Posts from "./components/Posts/Posts";
 import PostSearch from "./components/Posts/PostsSearch";
 import Albums from "./components/Albums/Albums";
 import CharactersSearch from "./components/CharactersSearch/CharactersSearch";
+import Users from "./components/Users/Users";
 
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
@@ -214,7 +215,8 @@ class App extends Component {
         {/* <Posts /> */}
 
         {/* <Albums /> */}
-        <CharactersSearch />
+        {/* <CharactersSearch /> */}
+        <Users />
       </>
     );
   }
