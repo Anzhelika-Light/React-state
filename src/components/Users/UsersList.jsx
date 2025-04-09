@@ -1,7 +1,14 @@
 const UsersList = ({ items, onOpen, setActiveUser }) => {
   const elements = items.map(({ id, name, email }) => (
     <li key={id}>
-      <p onClick={(onOpen, () => setActiveUser(id))}>{name}</p>
+      <p
+        onClick={() => {
+          onOpen();
+          setActiveUser(id);
+        }}
+      >
+        {name}
+      </p>
       <p>{email}</p>
     </li>
   ));
