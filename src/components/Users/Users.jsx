@@ -35,21 +35,27 @@ class Users extends Component {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
   };
 
+  openModal = (id) => {
+    this.toggleModal();
+    this.setActiveUser(id);
+  };
+
   setActiveUser = (id) => {
     this.setState({ activeUser: id });
   };
 
   render() {
     const { items, loading, error, showModal, activeUser } = this.state;
-    const { toggleModal, setActiveUser } = this;
+    const { toggleModal, setActiveUser, openModal } = this;
     const activeUserInfo = items.filter((item) => item.id === activeUser);
 
     return (
       <>
         <UsersList
           items={items}
-          onOpen={toggleModal}
-          setActiveUser={setActiveUser}
+          // onOpen={toggleModal}
+          // setActiveUser={setActiveUser}
+          openModal={openModal}
         />
         {loading && <p>...loading</p>}
         {error && <p>Failed to get users.Try again later.</p>}
