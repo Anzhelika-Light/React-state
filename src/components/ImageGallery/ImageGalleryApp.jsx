@@ -1,7 +1,6 @@
 import { Component } from "react";
 import Searchbar from "./Searchbar";
 import ImageGallery from "./ImageGallery";
-import ImageGalleryItem from "./ImageGalleryItem";
 import Loader from "./Loader";
 import Button from "./Button";
 import Modal from "../Modal";
@@ -15,10 +14,9 @@ class ImageGalleryApp extends Component {
     page: 1,
     search: "",
     showModal: false,
+    showLoadMore: true,
+    largeImgURL: null,
   };
-  //   componentDidMount() {
-  //     this.fetchImages();
-  //   }
 
   componentDidUpdate(_, prevState) {
     const { search, page } = this.state;
@@ -33,7 +31,10 @@ class ImageGalleryApp extends Component {
     try {
       const data = await searchImages(search, page);
       console.log(data);
-      this.setState(({ items }) => ({ items: [...items, ...data.hits] }));
+      this.setState(({ items }) => ({
+        items: [...items, ...data.hits],
+        showLoadMore: items.length + data.hits.length < data.total,
+      }));
     } catch (error) {
       console.log(error);
       this.setState({ error });
@@ -43,30 +44,50 @@ class ImageGalleryApp extends Component {
   }
 
   onSearch = ({ search }) => {
-    this.setState({ search });
+    this.setState({ search, items: [], page: 1 });
   };
 
   loadMore = () => {
     this.setState(({ page }) => ({ page: page + 1 }));
   };
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
+
+  setLargeImgURL = (largeImgURL) => {
+    this.setState({ largeImgURL });
+    console.log(largeImgURL);
+  };
+
   render() {
-    const { items, loading, error, page, showModal } = this.state;
-    const { loadMore, onSearch } = this;
+    const {
+      items,
+      loading,
+      error,
+      showLoadMore,
+      page,
+      showModal,
+      largeImgURL,
+    } = this.state;
+    const { loadMore, onSearch, toggleModal, setLargeImgURL } = this;
     const isPosts = Boolean(items.length);
 
     return (
       <>
         <Searchbar onSubmit={onSearch} />
-        {isPosts && <ImageGallery items={items} />}
-        {isPosts && <Button onClick={loadMore} />}
+        {isPosts && (
+          <ImageGallery
+            items={items}
+            onOpen={toggleModal}
+            setLargeImgURL={setLargeImgURL}
+          />
+        )}
+        {isPosts && showLoadMore && <Button onClick={loadMore} />}
         {loading && <Loader />}
         {error && <p>Failed to load images. Try again later.</p>}
-        {/* {showModal && (
-          <Modal>
-            <ImageGalleryItem items={items} />
-          </Modal>
-        )} */}
+
+        {showModal && <Modal onClose={toggleModal} largeImgURL={largeImgURL} />}
       </>
     );
   }

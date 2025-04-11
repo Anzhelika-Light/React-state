@@ -177,6 +177,11 @@ img {
   max-height: calc(100vh - 24px);
 }
 
+.largeImg {
+  width: 100%;
+  height: 100%;
+}
+
 /*
 * Стили компонента Buton (Load more)
 */

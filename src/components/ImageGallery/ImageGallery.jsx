@@ -1,13 +1,16 @@
+import ImageGalleryItem from "./ImageGalleryItem";
 import css from "./styles.module.css";
 
-const ImageGallery = ({ items = [] }) => {
-  const elements = items.map(({ id, webformatURL }) => {
-    return (
-      <li className={css.ImageGalleryItem} key={id}>
-        <img src={webformatURL} alt="" className={css.ImageGalleryItem_image} />
-      </li>
-    );
-  });
+const ImageGallery = ({ items = [], onOpen, setLargeImgURL }) => {
+  const elements = items.map(({ id, webformatURL, largeImageURL }) => (
+    <ImageGalleryItem
+      id={id}
+      webformatURL={webformatURL}
+      onOpen={onOpen}
+      setLargeImgURL={setLargeImgURL}
+      largeImageURL={largeImageURL}
+    />
+  ));
   return <ul className={css.ImageGallery}>{elements}</ul>;
 };
 
