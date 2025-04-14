@@ -3,7 +3,7 @@ import Searchbar from "./Searchbar";
 import ImageGallery from "./ImageGallery";
 import Loader from "./Loader";
 import Button from "./Button";
-import Modal from "../Modal";
+import Modal from "./Modal";
 import { searchImages } from "../../services/image-gallery-api";
 
 class ImageGalleryApp extends Component {
@@ -57,7 +57,6 @@ class ImageGalleryApp extends Component {
 
   setLargeImgURL = (largeImgURL) => {
     this.setState({ largeImgURL });
-    console.log(largeImgURL);
   };
 
   render() {

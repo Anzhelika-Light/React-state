@@ -40,6 +40,7 @@ import Albums from "./components/Albums/Albums";
 import CharactersSearch from "./components/CharactersSearch/CharactersSearch";
 import Users from "./components/Users/Users";
 import ImageGalleryApp from "./components/ImageGallery/ImageGalleryApp";
+import GoodsListApp from "./components/GoodsListApp/GoodsListApp";
 
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
@@ -219,6 +220,7 @@ class App extends Component {
         {/* <CharactersSearch /> */}
         {/* <Users /> */}
         <ImageGalleryApp />
+        {/* <GoodsListApp /> */}
       </>
     );
   }

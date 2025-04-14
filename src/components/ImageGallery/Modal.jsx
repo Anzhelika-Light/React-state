@@ -30,14 +30,16 @@ class Modal extends Component {
 
   handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
+      console.log(e.target);
+      console.log(e.currentTarget);
       this.props.onClose();
     }
   };
 
   render() {
     return createPortal(
-      <div className={css.overlay}>
-        <div className={css.modal}>
+      <div className={css.Overlay} onClick={this.handleOverlayClick}>
+        <div className={css.Modal}>
           <img className={css.largeImg} src={this.props.largeImgURL} alt="" />
         </div>
       </div>,
