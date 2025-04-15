@@ -1,7 +1,16 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 import css from "./styles.module.css";
 
 class AddGoodForm extends Component {
+  static defaultProps = {
+    onSubmit: () => {},
+  };
+
+  static PropTypes = {
+    onSubmit: PropTypes.func,
+  };
+
   state = {
     name: "",
     price: "",
@@ -30,8 +39,8 @@ class AddGoodForm extends Component {
 
     return (
       <form onSubmit={handleSubmit} className={css.form}>
-        <label className={css.label}>
-          Name:
+        <div className={css.wrapper}>
+          <label className={css.label}>Name:</label>
           <input
             type="text"
             name="name"
@@ -39,9 +48,9 @@ class AddGoodForm extends Component {
             onChange={handleChange}
             className={css.input}
           />
-        </label>
-        <label className={css.label}>
-          Price:
+        </div>
+        <div className={css.wrapper}>
+          <label className={css.label}>Price:</label>
           <input
             type="text"
             name="price"
@@ -49,9 +58,9 @@ class AddGoodForm extends Component {
             onChange={handleChange}
             className={css.input}
           />
-        </label>
-        <label className={css.label}>
-          Description:
+        </div>
+        <div className={css.wrapper}>
+          <label className={css.label}>Description:</label>
           <input
             type="text"
             name="description"
@@ -59,8 +68,12 @@ class AddGoodForm extends Component {
             onChange={handleChange}
             className={css.input}
           />
-        </label>
-        <button type="submit" className={css.btn}>
+        </div>
+        <button
+          type="submit"
+          className={css.btn}
+          disabled={this.props.isSubmitting}
+        >
           Add good
         </button>
       </form>

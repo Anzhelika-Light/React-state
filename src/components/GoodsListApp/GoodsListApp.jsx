@@ -1,38 +1,66 @@
 import { Component } from "react";
 import GoodsList from "./GoodsList";
+import * as API from "../../services/goods-api";
 import AddGoodForm from "./AddGoodForm";
 import css from "./styles.module.css";
 
 class GoodsListApp extends Component {
   state = {
-    items: [
-      {
-        createdAt: "2025-04-03T11:48:48.288Z",
-        name: "Rustic Wooden Chips",
-        description:
-          "Stylish Computer designed to make you stand out with fatal looks",
-        id: "1",
-      },
-      {
-        createdAt: "2025-04-03T19:24:39.374Z",
-        name: "Luxurious Plastic Chicken",
-        description:
-          "Savor the fluffy essence in our Bike, designed for runny culinary adventures",
-        id: "2",
-      },
-    ],
+    items: [],
+    loading: false,
+    error: null,
   };
 
-  addGood = (good) => {
-    console.log(good);
+  componentDidMount() {
+    this.fetchGoods();
+  }
+
+  fetchGoods = async () => {
+    try {
+      this.setState({ loading: true });
+      const data = await API.getGoods();
+      this.setState({ items: data });
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ loading: false });
+    }
+  };
+
+  addGood = async (values) => {
+    try {
+      this.setState({ loading: true });
+      const good = await API.addGood(values);
+      this.setState(({ items }) => ({
+        items: [...items, good],
+      }));
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ loading: false });
+    }
+  };
+
+  deleteGood = async (id) => {
+    try {
+      this.setState({ loading: true });
+      await API.deleteGood(id);
+      this.setState(({ items }) => ({
+        items: items.filter((item) => item.id !== id),
+      }));
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   render() {
-    const { items } = this.state;
+    const { items, loading } = this.state;
     return (
       <div className={css.container}>
-        <AddGoodForm onSubmit={this.addGood} />
-        <GoodsList items={items} />
+        <AddGoodForm onSubmit={this.addGood} isSubmitting={loading} />
+        <GoodsList items={items} onDelete={this.deleteGood} />
       </div>
     );
   }

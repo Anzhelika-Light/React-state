@@ -219,8 +219,8 @@ class App extends Component {
         {/* <Albums /> */}
         {/* <CharactersSearch /> */}
         {/* <Users /> */}
-        <ImageGalleryApp />
-        {/* <GoodsListApp /> */}
+        {/* <ImageGalleryApp /> */}
+        <GoodsListApp />
       </>
     );
   }
