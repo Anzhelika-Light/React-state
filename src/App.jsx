@@ -3,9 +3,11 @@ import { nanoid } from "nanoid";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 
-import Counter from "./components/Counter";
+// import Counter from "./components/Counter";
+import Counter from "./components/HOOKS/Counter/Counter";
 import Dropdown from "./components/Dropdown";
-import ColorPicker from "./components/ColorPicker";
+// import ColorPicker from "./components/ColorPicker";
+import ColorPicker from "./components/HOOKS/ColorPicker/ColorPicker";
 import Form from "./components/Form";
 import TodoList from "./components/Todo/TodoList";
 import TodoEditor from "./components/Todo/TodoEditor";
@@ -25,7 +27,7 @@ import Reader from "./components/Reader/Reader";
 import UserRegistration from "./components/UserRegistration";
 import ShoppingPlan from "./components/Shopping/ShoppingPlan";
 import Modal from "./components/Modal";
-import Clock from "./components/Clock";
+// import Clock from "./components/Clock";
 import Tabs from "./components/Tabs";
 import IconButton from "./components/IconButton";
 import { ReactComponent as AddIcon } from "./icons/add.svg";
@@ -41,6 +43,12 @@ import CharactersSearch from "./components/CharactersSearch/CharactersSearch";
 import Users from "./components/Users/Users";
 import ImageGalleryApp from "./components/ImageGallery/ImageGalleryApp";
 import GoodsListApp from "./components/GoodsListApp/GoodsListApp";
+import SignupForm from "./components/HOOKS/SignupForm/SignupForm";
+import Clock from "./components/HOOKS/Clock/Clock";
+import PokemonView from "./components/HOOKS/Pokemon/PokemonView";
+import Counter2 from "./components/HOOKS/Counter2/Counter2";
+import Friends from "./components/HOOKS/Friends/Friends";
+import News from "./components/HOOKS/News/News";
 
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
@@ -53,14 +61,14 @@ import tabs from "./data/tabs.json";
 
 import "./App.css";
 
-// const colorPickerOptions = [
-//   { label: "red", color: "#F44336" },
-//   { label: "green", color: "#4CAF50" },
-//   { label: "blue", color: "#2196F3" },
-//   { label: "grey", color: "#607D8B" },
-//   { label: "pink", color: "#E91E63" },
-//   { label: "indigo", color: "#3F51B5" },
-// ];
+const colorPickerOptions = [
+  { label: "red", color: "#F44336" },
+  { label: "green", color: "#4CAF50" },
+  { label: "blue", color: "#2196F3" },
+  { label: "grey", color: "#607D8B" },
+  { label: "pink", color: "#E91E63" },
+  { label: "indigo", color: "#3F51B5" },
+];
 
 class App extends Component {
   state = {
@@ -156,10 +164,10 @@ class App extends Component {
     return (
       <>
         {/* <Counter initialValue={10} /> */}
+        {/* <Counter /> HOOKS */}
         {/* <Dropdown /> */}
         {/* <ColorPicker options={colorPickerOptions} /> */}
         {/* <Form onSubmit={this.onSubmitHandler} />*/}
-
         {/* TODOS */}
         {/* <div>
           <p>General number of todos: {totalTodoCount}</p>
@@ -180,7 +188,6 @@ class App extends Component {
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted}
         /> */}
-
         {/* <Menu items={menuItems} /> */}
         {/* <ToggleButton text="Click me!" /> */}
         {/* <Vote /> */}
@@ -195,32 +202,30 @@ class App extends Component {
         {/* <Reader items={publications} /> */}
         {/* <UserRegistration /> */}
         {/*<ShoppingPlan /> */}
-
         {/* <button type="button" className="btn" onClick={this.toggleModal}>
           Show / hide timer
         </button>
         {showModal && <Clock />} */}
         {/* <Tabs items={tabs} /> */}
-
         {/* <PlayerApp /> */}
-
         {/* <Reader2 items={publications2} /> */}
-
         {/* <Pokemon />
         <ToastContainer autoClose={3000} /> */}
-
         {/* <MaterialApp /> */}
-
         {/* <FormsWithFormik /> */}
-
         {/* <PostSearch /> */}
         {/* <Posts /> */}
-
         {/* <Albums /> */}
         {/* <CharactersSearch /> */}
         {/* <Users /> */}
         {/* <ImageGalleryApp /> */}
-        <GoodsListApp />
+        {/* <GoodsListApp /> */}
+        {/* <SignupForm /> */}
+        {/* <Clock /> */}
+        {/* <PokemonView /> */}
+        {/* <Counter2 /> */}
+        {/* <Friends /> */}
+        <News />
       </>
     );
   }
