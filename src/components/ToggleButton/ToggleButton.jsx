@@ -1,41 +1,58 @@
-import { Component } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import css from "./ToggleButton.module.css";
 
-class ToggleButton extends Component {
-  static propTypes = {
-    text: PropTypes.string.isRequired,
+const ToggleButton = ({ text }) => {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => {
+    setIsActive((prevState) => !prevState);
   };
 
-  state = {
-    isActive: false,
-  };
+  return (
+    <button
+      className={isActive ? `${css.btn}  ${css.active}` : css.btn}
+      type="button"
+      onClick={handleClick}
+    >
+      {text}
+    </button>
+  );
+};
 
-  handleClick = () => {
-    this.setState((prevState) => ({
-      isActive: !prevState.isActive,
-    }));
-  };
+ToggleButton.propTypes = {
+  text: PropTypes.string.isRequired,
+};
+// class ToggleButton extends Component {
+//   static propTypes = {
+//     text: PropTypes.string.isRequired,
+//   };
 
-  render() {
-    const { isActive } = this.state;
-    const { text } = this.props;
-    const { handleClick } = this;
+//   state = {
+//     isActive: false,
+//   };
 
-    return (
-      <button
-        className={isActive ? `${css.btn}  ${css.active}` : css.btn}
-        type="button"
-        onClick={handleClick}
-      >
-        {text}
-      </button>
-    );
-  }
-}
+//   handleClick = () => {
+//     this.setState((prevState) => ({
+//       isActive: !prevState.isActive,
+//     }));
+//   };
 
-// ToggleButton.propTypes = {
-//   text: PropTypes.string.isRequired,
-// };
+//   render() {
+//     const { isActive } = this.state;
+//     const { text } = this.props;
+//     const { handleClick } = this;
+
+//     return (
+//       <button
+//         className={isActive ? `${css.btn}  ${css.active}` : css.btn}
+//         type="button"
+//         onClick={handleClick}
+//       >
+//         {text}
+//       </button>
+//     );
+//   }
+// }
 
 export default ToggleButton;

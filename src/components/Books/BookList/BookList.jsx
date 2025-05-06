@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import css from "./BookList.module.css";
 
 const BookList = ({ books = [], deleteBook }) => {
+  console.log(books);
   const elements = books.map(({ id, title, author }) => (
     <li key={id} className={css.item}>
       {title}. Author: {author}.

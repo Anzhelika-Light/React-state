@@ -5,16 +5,15 @@ import NewsSearchForm from "./NewsSearchForm";
 axios.defaults.headers.common["Authorization"] =
   "Bearer 4330ebfabc654a6992c2aa792f3173a3";
 
-const APIfetchArticles = ({
+const APIfetchArticles = async ({
   searchQuery = "",
   currentPage = 1,
   pageSize = 5,
 } = {}) => {
-  return axios
-    .get(
-      `https://newsapi.org/v2/everything?q=${searchQuery}&pageSize=${pageSize}&page=${currentPage}`
-    )
-    .then((response) => response.data.articles);
+  const response = await axios.get(
+    `https://newsapi.org/v2/everything?q=${searchQuery}&pageSize=${pageSize}&page=${currentPage}`
+  );
+  return response.data.articles;
 };
 
 export default function News() {
@@ -33,7 +32,10 @@ export default function News() {
           setArticles((prevArticles) => [...prevArticles, ...responseArticles]);
           // setCurrentPage((prevCurrentPage) => prevCurrentPage + 1);
         })
-        .catch((error) => setError(error.message))
+        .catch((error) => {
+          console.log(error.response.data);
+          setError(error.message);
+        })
         .finally(() => setIsLoading(false));
     };
 

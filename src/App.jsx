@@ -191,7 +191,7 @@ class App extends Component {
         {/* <Menu items={menuItems} /> */}
         {/* <ToggleButton text="Click me!" /> */}
         {/* <Vote /> */}
-        {/* <Books /> */}
+        <Books />
         {/* <Feedback /> */}
         {/* <PhoneBook showModal={showModal} onClose={this.toggleModal} /> */}
         {/* <AccordionItem /> */}
@@ -225,7 +225,7 @@ class App extends Component {
         {/* <PokemonView /> */}
         {/* <Counter2 /> */}
         {/* <Friends /> */}
-        <News />
+        {/* <News /> */}
       </>
     );
   }
