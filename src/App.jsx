@@ -213,7 +213,7 @@ class App extends Component {
         <ToastContainer autoClose={3000} /> */}
         {/* <MaterialApp /> */}
         {/* <FormsWithFormik /> */}
-        {/* <PostSearch /> */}
+        <PostSearch />
         {/* <Posts /> */}
         {/* <Albums /> */}
         {/* <CharactersSearch /> */}

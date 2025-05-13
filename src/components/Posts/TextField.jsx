@@ -19,6 +19,7 @@ const TextField = ({
     <div className={css.formGroup}>
       {label && <label htmlFor={id}>{label}</label>}
       <input
+        autoFocus
         id={id}
         value={value}
         name={name}

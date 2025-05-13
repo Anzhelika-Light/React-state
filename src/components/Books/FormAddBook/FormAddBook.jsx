@@ -1,37 +1,52 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import css from "./FormAddBook.module.css";
+import { nanoid } from "nanoid";
+import useForm from "../../../hooks/useForm";
+import initialState from "../../Posts/initialState";
 
 const FormAddBook = ({ onSubmit }) => {
-  const [state, setState] = useState({
-    title: "",
-    author: "",
+  //Using custom hook useForm
+  const { state, handleChange, handleSubmit } = useForm({
+    initialState,
+    onSubmit,
   });
-
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setState((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(state);
-    reset();
-  };
-
-  const reset = () => {
-    setState({
-      title: "",
-      author: "",
-    });
-  };
   const { title, author } = state;
+
+  // const [state, setState] = useState({
+  //   title: "",
+  //   author: "",
+  // });
+
+  // const handleChange = ({ target }) => {
+  //   const { name, value } = target;
+  //   setState((prevState) => ({ ...prevState, [name]: value }));
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   onSubmit(state);
+  //   reset();
+  // };
+
+  // const reset = () => {
+  //   setState({
+  //     title: "",
+  //     author: "",
+  //   });
+  // };
+
+  // const titleId = useMemo(() => nanoid(), []);
+  // const authorId = useMemo(() => nanoid(), []);
+
+  // const { title, author } = state;
 
   return (
     <form onSubmit={handleSubmit}>
       <label className={css.formGroup}>
         Title:
         <input
+          // id={titleId}
           name="title"
           type="text"
           className={css.field}
@@ -43,6 +58,7 @@ const FormAddBook = ({ onSubmit }) => {
       <label className={css.formGroup}>
         Author:
         <input
+          // id={authorId}
           name="author"
           type="text"
           className={css.field}

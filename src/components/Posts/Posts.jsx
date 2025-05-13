@@ -1,80 +1,108 @@
-import { Component } from "react";
+import { useState, useEffect, Component } from "react";
 import PostList from "./PostList";
 import { getPosts } from "../../services/posts-api";
 import css from "./Posts.module.css";
 
-class Posts extends Component {
-  state = {
-    posts: [],
-    isLoading: false,
-    error: null,
-    page: 1,
+const Posts = () => {
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getPosts(page);
+        setPosts((posts) => [...posts, ...data]);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchPosts();
+  }, [page]);
+
+  const loadMore = () => {
+    setPage((page) => page + 1);
   };
 
-  componentDidMount() {
-    this.fetchPosts();
-  }
+  const isPosts = Boolean(posts.length);
 
-  componentDidUpdate(_, prevState) {
-    const { page } = this.state;
-    if (prevState.page !== page) {
-      this.fetchPosts();
-    }
-  }
+  return (
+    <>
+      <h2 className={css.title}>Posts list</h2>
+      {isPosts && <PostList posts={posts} />}
+      {isLoading && <p>...loading</p>}
+      {error && <p>Failed to load posts. Try again later.</p>}
+      {isPosts && (
+        <button type="button" onClick={loadMore}>
+          Load more
+        </button>
+      )}
+    </>
+  );
+};
 
-  async fetchPosts() {
-    const { page } = this.state;
-    this.setState({ isLoading: true });
+// class Posts extends Component {
+//   state = {
+//     posts: [],
+//     isLoading: false,
+//     error: null,
+//     page: 1,
+//   };
 
-    try {
-      const data = await getPosts(page);
-      this.setState(({ posts }) => ({ posts: [...posts, ...data] }));
-    } catch (error) {
-      this.setState({ error });
-    } finally {
-      this.setState({ isLoading: false });
-    }
-  }
+//   componentDidMount() {
+//     this.fetchPosts();
+//   }
 
-  //   fetchPosts() {
-  //     const { page } = this.state;
-  //     this.setState({ isLoading: true });
-  //     axios
-  //       .get(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=12`)
-  //       .then(({ data }) => {
-  //         this.setState(({ posts }) => ({ posts: [...posts, ...data] }));
-  //       })
-  //       .catch((error) => {
-  //         this.setState({ error });
-  //       })
-  //       .finally(() => this.setState({ isLoading: false }));
-  //   }
+//   componentDidUpdate(_, prevState) {
+//     const { page } = this.state;
+//     if (prevState.page !== page) {
+//       this.fetchPosts();
+//     }
+//   }
 
-  loadMore = () => {
-    this.setState(({ page }) => ({
-      page: page + 1,
-    }));
-  };
+//   async fetchPosts() {
+//     const { page } = this.state;
+//     this.setState({ isLoading: true });
 
-  render() {
-    const { posts, isLoading, error } = this.state;
-    const { loadMore } = this;
-    const isPosts = Boolean(posts.length);
+//     try {
+//       const data = await getPosts(page);
+//       this.setState(({ posts }) => ({ posts: [...posts, ...data] }));
+//     } catch (error) {
+//       this.setState({ error });
+//     } finally {
+//       this.setState({ isLoading: false });
+//     }
+//   }
 
-    return (
-      <>
-        <h2 className={css.title}>Posts list</h2>
-        {isPosts && <PostList items={posts} />}
-        {isLoading && <p>...loading</p>}
-        {error && <p>Failed to load posts. Try again later.</p>}
-        {isPosts && (
-          <button type="button" onClick={loadMore}>
-            Load more
-          </button>
-        )}
-      </>
-    );
-  }
-}
+//   loadMore = () => {
+//     this.setState(({ page }) => ({
+//       page: page + 1,
+//     }));
+//   };
+
+//   render() {
+//     const { posts, isLoading, error } = this.state;
+//     const { loadMore } = this;
+//     const isPosts = Boolean(posts.length);
+
+//     return (
+//       <>
+//         <h2 className={css.title}>Posts list</h2>
+//         {isPosts && <PostList items={posts} />}
+//         {isLoading && <p>...loading</p>}
+//         {error && <p>Failed to load posts. Try again later.</p>}
+//         {isPosts && (
+//           <button type="button" onClick={loadMore}>
+//             Load more
+//           </button>
+//         )}
+//       </>
+//     );
+//   }
+// }
 
 export default Posts;

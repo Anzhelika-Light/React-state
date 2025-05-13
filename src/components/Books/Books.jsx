@@ -1,8 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { nanoid } from "nanoid";
 import FormAddBook from "./FormAddBook";
 import BookList from "./BookList/BookList";
 import css from "./Books.module.css";
+
+const getFilteredBooks = (filter, books) => {
+  // Якщо властивість фільтр порожня, то просто повертаємо усі книги, не проганяючи їх через фільтр
+  if (!filter) {
+    return books;
+  }
+  const normalizedFilter = filter.toLowerCase();
+  return books.filter(
+    ({ title, author }) =>
+      title.toLowerCase().includes(normalizedFilter) ||
+      author.toLowerCase().includes(normalizedFilter)
+  );
+};
 
 const Books = () => {
   const [books, setBooks] = useState(() => {
@@ -15,6 +28,17 @@ const Books = () => {
   useEffect(() => {
     localStorage.setItem("books", JSON.stringify(books));
   }, [books]);
+
+  const isDublicate = ({ title, author }) => {
+    const normalizedTitle = title.toLowerCase();
+    const normalizedAuthor = author.toLowerCase();
+    const result = books.find(
+      (book) =>
+        book.title.toLowerCase() === normalizedTitle &&
+        book.author.toLowerCase() === normalizedAuthor
+    );
+    return Boolean(result);
+  };
 
   const addBook = (data) => {
     if (isDublicate(data)) {
@@ -30,42 +54,24 @@ const Books = () => {
     setBooks((books) => [...books, newBook]);
   };
 
-  const isDublicate = ({ title, author }) => {
-    const normalizedTitle = title.toLowerCase();
-    const normalizedAuthor = author.toLowerCase();
-    const result = books.find(
-      (book) =>
-        book.title.toLowerCase() === normalizedTitle &&
-        book.author.toLowerCase() === normalizedAuthor
-    );
-    return Boolean(result);
-  };
+  const deleteBook = useCallback(
+    (bookId) => {
+      setBooks((books) => {
+        const newBooks = books.filter((book) => book.id !== bookId);
+        return newBooks;
+      });
+    },
+    [setBooks]
+  );
 
-  const deleteBook = (bookId) => {
-    setBooks((books) => {
-      const newBooks = books.filter((book) => book.id !== bookId);
-      return newBooks;
-    });
-  };
+  const handleFilter = useCallback(
+    ({ target }) => {
+      setFilter(target.value);
+    },
+    [setFilter]
+  );
 
-  const getFilteredBooks = () => {
-    // Якщо властивість фільтр порожня, то просто повертаємо усі книги, не проганяючи їх через фільтр
-    if (!filter) {
-      return books;
-    }
-    const normalizedFilter = filter.toLowerCase();
-    return books.filter(
-      ({ title, author }) =>
-        title.toLowerCase().includes(normalizedFilter) ||
-        author.toLowerCase().includes(normalizedFilter)
-    );
-  };
-
-  const handleFilter = ({ target }) => {
-    setFilter(target.value);
-  };
-
-  const filteredBooks = getFilteredBooks();
+  const filteredBooks = getFilteredBooks(filter, books);
 
   return (
     <div className={css.container}>

@@ -1,27 +1,16 @@
 import PropTypes from "prop-types";
+import BookListItem from "./BookListItem";
 import css from "./BookList.module.css";
 
 const BookList = ({ books = [], deleteBook }) => {
-  console.log(books);
-  const elements = books.map(({ id, title, author }) => (
-    <li key={id} className={css.item}>
-      {title}. Author: {author}.
-      <span
-        type="button"
-        className={css.remove}
-        onClick={() => {
-          deleteBook(id);
-        }}
-      >
-        x
-      </span>
-    </li>
+  const elements = books.map((item) => (
+    <BookListItem key={item.id} {...item} deleteBook={deleteBook} />
   ));
   return (
-    <ol className={css.list}>
+    <>
       <h4 className={css.title}>Book List</h4>
-      {elements}
-    </ol>
+      <ol className={css.list}>{elements}</ol>
+    </>
   );
 };
 
