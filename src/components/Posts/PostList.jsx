@@ -1,7 +1,7 @@
 import css from "./PostList.module.css";
 
-const PostList = ({ posts = [], onClick }) => {
-  const elements = posts.map(({ id, title, body }) => (
+const PostList = ({ items = [], onClick }) => {
+  const elements = items.map(({ id, title, body }) => (
     <li key={id} className={css.item} onClick={() => onClick({ title, body })}>
       <p>{id}</p>
       {title}

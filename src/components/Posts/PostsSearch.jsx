@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import useFetch from "../../hooks/useFetch";
 import PostList from "./PostList";
 import PostsSearchForm from "./PostsSearchForm";
 import Modal from "./Modal/Modal";
@@ -6,9 +7,9 @@ import { searchPosts } from "../../services/posts-api";
 import css from "./PostsSearch.module.css";
 
 const PostSearch = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [posts, setPosts] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
@@ -17,28 +18,33 @@ const PostSearch = () => {
     body: "",
   });
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
+  const { items, loading, error, setItems, setLoading, setError } = useFetch({
+    fetchData: searchPosts,
+    dependencies: [search, page],
+    isFetch: () => !search,
+  });
 
-      try {
-        const data = await searchPosts(search, page);
-        setPosts((prevPosts) => [...prevPosts, ...data]);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    if (search) {
-      fetchPosts();
-    }
-  }, [search, page]);
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const data = await searchPosts(search, page);
+  //       setPosts((prevPosts) => [...prevPosts, ...data]);
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   if (search) {
+  //     fetchPosts();
+  //   }
+  // }, [search, page]);
 
-  const onSearch = (search) => {
+  const onSearch = ({ search }) => {
     setSearch(search);
     setPage(1);
-    setPosts([]);
+    setItems([]);
   };
 
   const loadMore = () => {
@@ -58,7 +64,7 @@ const PostSearch = () => {
     });
   };
 
-  const isPosts = Boolean(posts.length);
+  const isPosts = Boolean(items.length);
 
   return (
     <div>
@@ -69,7 +75,7 @@ const PostSearch = () => {
         </Modal>
       )}
       <PostsSearchForm onSubmit={onSearch} />
-      {isPosts && <PostList posts={posts} onClick={openModal} />}
+      {isPosts && <PostList items={items} onClick={openModal} />}
       {loading && <p>...Loading posts</p>}
       {error && <p>Failed to load posts. Try again later.</p>}
       {isPosts && <button onClick={loadMore}>Load more</button>}

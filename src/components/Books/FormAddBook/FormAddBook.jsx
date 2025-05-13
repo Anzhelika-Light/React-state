@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import css from "./FormAddBook.module.css";
 import { nanoid } from "nanoid";
 import useForm from "../../../hooks/useForm";
-import initialState from "../../Posts/initialState";
+
+// import initialState from "../../Posts/initialState";
+
+const initialState = { title: "", author: "" };
 
 const FormAddBook = ({ onSubmit }) => {
   //Using custom hook useForm

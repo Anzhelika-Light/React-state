@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { nanoid } from "nanoid";
 import FormAddBook from "./FormAddBook";
 import BookList from "./BookList/BookList";
+import useLocalStorage from "../../hooks/useLocalStorageBL";
 import css from "./Books.module.css";
 
 const getFilteredBooks = (filter, books) => {
@@ -18,16 +19,23 @@ const getFilteredBooks = (filter, books) => {
 };
 
 const Books = () => {
-  const [books, setBooks] = useState(() => {
-    const value = JSON.parse(localStorage.getItem("books"));
-    return value || [];
-  });
+  // const [books, setBooks] = useState(() => {
+  //   try {
+  //     const value = JSON.parse(localStorage.getItem("books"));
+  //     return value || [];
+  //   } catch (error) {
+  //     return [];
+  //   }
+  // });
+
+  // Using custom hook useLocalStorage
+  const [books, setBooks] = useLocalStorage({ key: "books", initialState: [] });
 
   const [filter, setFilter] = useState("");
 
-  useEffect(() => {
-    localStorage.setItem("books", JSON.stringify(books));
-  }, [books]);
+  // useEffect(() => {
+  //   localStorage.setItem("books", JSON.stringify(books));
+  // }, [books]);
 
   const isDublicate = ({ title, author }) => {
     const normalizedTitle = title.toLowerCase();

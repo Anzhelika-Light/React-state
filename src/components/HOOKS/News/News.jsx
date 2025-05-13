@@ -39,7 +39,9 @@ export default function News() {
         .finally(() => setIsLoading(false));
     };
 
-    fetchArticles();
+    if (query) {
+      fetchArticles();
+    }
   }, [currentPage, query]);
 
   const onChangeQuery = (query) => {

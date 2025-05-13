@@ -1,4 +1,4 @@
-import { Component, useState, useRef, useEffect } from "react";
+import { Component, useState, useRef, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
 import useForm from "../../hooks/useForm";
@@ -16,6 +16,8 @@ const PostsSearchForm = ({ onSubmit }) => {
     initialState,
     onSubmit,
   });
+
+  const searchId = useMemo(() => nanoid(), []);
   const { search } = state;
 
   // const [search, setSearch] = useState("");
@@ -46,7 +48,7 @@ const PostsSearchForm = ({ onSubmit }) => {
     <form className={css.form} onSubmit={handleSubmit}>
       {/* <input type="text" ref={searchRef} /> */}
       <TextField
-        // id={searchId}
+        id={searchId}
         value={search}
         handleChange={handleChange}
         {...fields.search}
@@ -54,6 +56,9 @@ const PostsSearchForm = ({ onSubmit }) => {
       <SubmitButton text="Search" />
     </form>
   );
+};
+PostsSearchForm.defaultProps = {
+  onSubmit: () => {},
 };
 
 PostsSearchForm.PropTypes = {
