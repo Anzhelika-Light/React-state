@@ -49,6 +49,7 @@ import PokemonView from "./components/HOOKS/Pokemon/PokemonView";
 import Counter2 from "./components/HOOKS/Counter2/Counter2";
 import Friends from "./components/HOOKS/Friends/Friends";
 import News from "./components/HOOKS/News/News";
+import MainApp from "./components/HOOKS/Context/MainApp";
 
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
@@ -213,7 +214,7 @@ class App extends Component {
         <ToastContainer autoClose={3000} /> */}
         {/* <MaterialApp /> */}
         {/* <FormsWithFormik /> */}
-        <PostSearch />
+        {/* <PostSearch /> */}
         {/* <Posts /> */}
         {/* <Albums /> */}
         {/* <CharactersSearch /> */}
@@ -226,6 +227,7 @@ class App extends Component {
         {/* <Counter2 /> */}
         {/* <Friends /> */}
         {/* <News /> */}
+        <MainApp />
       </>
     );
   }

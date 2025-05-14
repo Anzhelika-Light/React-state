@@ -1,0 +1,12 @@
+.lang {
+  display: inline-block;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.currentLang {
+  /* composes: lang; */
+  margin: 0 10px;
+  font-weight: bold;
+  display: inline-block;
+}
