@@ -4,10 +4,10 @@ import Navbar from "./Navbar/Navbar";
 
 function MainApp() {
   return (
-    <LangContext.Provider value="ua">
+    <LangContext value="ua">
       <Navbar />
       <Main />
-    </LangContext.Provider>
+    </LangContext>
   );
 }
 

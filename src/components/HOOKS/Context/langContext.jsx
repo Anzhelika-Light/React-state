@@ -2,7 +2,7 @@ import { useState, createContext } from "react";
 
 export const langContext = createContext("ua");
 
-const LangContext = ({ children }) => {
+const LangProvider = ({ children }) => {
   const [lang, setLang] = useState("ua");
 
   const switchLang = () => {
@@ -16,4 +16,4 @@ const LangContext = ({ children }) => {
   );
 };
 
-export default LangContext;
+export default LangProvider;

@@ -170,6 +170,7 @@ class App extends Component {
         {/* <ColorPicker options={colorPickerOptions} /> */}
         {/* <Form onSubmit={this.onSubmitHandler} />*/}
         {/* TODOS */}
+
         {/* <div>
           <p>General number of todos: {totalTodoCount}</p>
           <p>Done todos: {completedTodoCount}</p>
@@ -189,12 +190,13 @@ class App extends Component {
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted}
         /> */}
+
         {/* <Menu items={menuItems} /> */}
         {/* <ToggleButton text="Click me!" /> */}
         {/* <Vote /> */}
         {/* <Books /> */}
         {/* <Feedback /> */}
-        {/* <PhoneBook showModal={showModal} onClose={this.toggleModal} /> */}
+        <PhoneBook showModal={showModal} onClose={this.toggleModal} />
         {/* <AccordionItem /> */}
         {/* <AccordionOption1 accordionItems={accordionItems} /> */}
         {/* <AccordionOption2 accordionItems={accordionItems} /> */}
@@ -227,7 +229,7 @@ class App extends Component {
         {/* <Counter2 /> */}
         {/* <Friends /> */}
         {/* <News /> */}
-        <MainApp />
+        {/* <MainApp /> */}
       </>
     );
   }
