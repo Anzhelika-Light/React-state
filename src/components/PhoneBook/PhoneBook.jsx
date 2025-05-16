@@ -9,27 +9,35 @@ import { ReactComponent as AddIcon } from "../../icons/add.svg";
 import { TiUserAdd } from "react-icons/ti";
 import { nanoid } from "nanoid";
 import ContactFormWithFormik from "./ContactFormWithFormik/ContactFormWithFormik";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import css from "./PhoneBook.module.css";
 
-const PhoneBook = ({ showModal, onClose }) => {
-  const [contacts, setContacts] = useState([
-    { id: "id-1", name: "Rosie Simpson", number: "0932896715" },
-    { id: "id-2", name: "Hermione Kline", number: "0932896716" },
-    { id: "id-3", name: "Eden Clements", number: "0932896717" },
-    { id: "id-4", name: "Annie Copeland", number: "0932896718" },
-  ]);
+const PhoneBook = () => {
+  // const [contacts, setContacts] = useState(() => {
+  //   try {
+  //     const parsedContacts = JSON.parse(localStorage.getItem("contacts"));
+  //     return parsedContacts?.length ? parsedContacts : [];
+  //   } catch (error) {
+  //     console.log(error.message);
+  //     return [];
+  //   }
+  // });
+
+  const [contacts, setContacts] = useLocalStorage({
+    key: "contacts",
+    initialState: [],
+  });
+
   const [filter, setFilter] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    const parsedContacts = JSON.parse(localStorage.getItem("contacts"));
-    if (parsedContacts?.length) {
-      setContacts(parsedContacts);
-    }
-  }, []);
+  // useEffect(() => {
+  //   localStorage.setItem("contacts", JSON.stringify(contacts));
+  // }, [contacts]);
 
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
+  const toggleModal = () => {
+    setShowModal((showModal) => !showModal);
+  };
 
   const addContact = (data) => {
     const newContact = { id: nanoid(), ...data };
@@ -38,13 +46,15 @@ const PhoneBook = ({ showModal, onClose }) => {
       ? alert("This contact already exists.")
       : setContacts((prevContacts) => [newContact, ...prevContacts]);
 
-    onClose();
+    // onClose();
+    toggleModal();
   };
 
   const isDublicate = (data) => {
-    return contacts.find(
+    const result = contacts.find(
       ({ name, number }) => data.name === name && data.number === number
     );
+    return Boolean(result);
   };
 
   const deleteContact = (id) => {
@@ -72,13 +82,14 @@ const PhoneBook = ({ showModal, onClose }) => {
     <>
       <h1>Phonebook</h1>
       {/* <ContactForm onSubmit={addContact} /> */}
-      <IconButton onClick={onClose}>
+      <IconButton onClick={toggleModal}>
         {/* <AddIcon fill="white" width="40" height="40" /> */}
         <TiUserAdd className={css.icon} />
       </IconButton>
       {showModal && (
-        <Modal onClose={onClose}>
+        <Modal onClose={toggleModal}>
           <Section>
+            {/* <ContactForm onSubmit={addContact} /> */}
             <ContactFormWithFormik onSubmit={addContact} />
           </Section>
         </Modal>
