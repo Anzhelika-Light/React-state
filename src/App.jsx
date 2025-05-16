@@ -200,7 +200,7 @@ class App extends Component {
         {/* <AccordionItem /> */}
         {/* <AccordionOption1 accordionItems={accordionItems} /> */}
         {/* <AccordionOption2 accordionItems={accordionItems} /> */}
-        {/* <CharactersList characters={characters} /> */}
+        {/* <CharactersList items={characters} /> */}
         {/* <GoodsList goods={goods} /> */}
         {/* <Reader items={publications} /> */}
         {/* <UserRegistration /> */}
@@ -218,10 +218,10 @@ class App extends Component {
         {/* <FormsWithFormik /> */}
         {/* <PostSearch /> */}
         {/* <Posts /> */}
-        {/* <Albums /> */}
+        <Albums />
         {/* <CharactersSearch /> */}
         {/* <Users /> */}
-        <ImageGalleryApp />
+        {/* <ImageGalleryApp /> */}
         {/* <GoodsListApp /> */}
         {/* <SignupForm /> */}
         {/* <Clock /> */}

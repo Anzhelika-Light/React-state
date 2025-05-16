@@ -55,9 +55,9 @@ const ImageGalleryApp = () => {
     setShowModal((showModal) => !showModal);
   };
 
-  const getLargeImgURL = (largeImgURL) => {
-    setLargeImgURL(largeImgURL);
-  };
+  // const getLargeImgURL = (largeImgURL) => {
+  //   setLargeImgURL(largeImgURL);
+  // };
 
   const isPosts = Boolean(items.length);
 
@@ -68,7 +68,7 @@ const ImageGalleryApp = () => {
         <ImageGallery
           items={items}
           onOpen={toggleModal}
-          setLargeImgURL={getLargeImgURL}
+          setLargeImgURL={setLargeImgURL}
         />
       )}
       {isPosts && showLoadMore && <Button onClick={loadMore} />}

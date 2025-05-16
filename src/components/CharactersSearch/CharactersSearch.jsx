@@ -1,5 +1,4 @@
-import { Component } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import CharactersSearchForm from "./CharactersSearchForm/CharactersSearchForm";
 import CharactersList from "./CharactersList/CharactersList";
 import Modal from "../Modal";
@@ -7,76 +6,64 @@ import Character from "./Character/Character";
 import { searchCharacters } from "../../services/characters-api";
 import css from "./CharactersSearch.module.css";
 
-class CharactersSearch extends Component {
-  state = {
-    items: [],
-    loading: false,
-    error: null,
-    search: "",
-    showModal: false,
-  };
+const CharactersSearch = () => {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [search, setSearch] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
-  componentDidUpdate(_, prevState) {
-    const { search } = this.state;
-    if (search && prevState.search !== search) {
-      this.searchCharacters();
+  useEffect(() => {
+    const showCharacters = async () => {
+      try {
+        setLoading(true);
+        const data = await searchCharacters(search);
+        setItems(data.results);
+        // setItems((prevItems) => [...prevItems, ...data.results]);
+      } catch (error) {
+        setError;
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (search) {
+      showCharacters();
     }
-  }
+  }, [search]);
 
-  async searchCharacters() {
-    const { search } = this.state;
-    this.setState({ loading: true });
-
-    try {
-      const data = await searchCharacters(search);
-      this.setState(({ items }) => ({ items: [...items, ...data.results] }));
-    } catch (error) {
-      this.setState({ error });
-    } finally {
-      this.setState({ loading: false });
-    }
-  }
-
-  onSearch = ({ search }) => {
-    this.setState({ search });
+  const onSearch = (search) => {
+    setSearch(search);
   };
 
-  deleteCharacter = (name) => {
-    const { items } = this.state;
-    this.setState({ items: items.filter((item) => item.name !== name) });
+  const deleteCharacter = (name) => {
+    setItems((prevItems) => prevItems.filter((item) => item.name !== name));
   };
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
+  const toggleModal = () => {
+    setShowModal((showModal) => !showModal);
   };
 
-  render() {
-    const { items, loading, error, showModal } = this.state;
-    const { onSearch, deleteCharacter, toggleModal } = this;
-    const isCharacters = Boolean(items.length);
+  const isCharacters = Boolean(items.length);
 
-    return (
-      <div>
-        <CharactersSearchForm onSubmit={onSearch} />
-        {isCharacters && (
-          <CharactersList
-            items={items}
-            onDelete={deleteCharacter}
-            onOpen={toggleModal}
-          />
-        )}
-        {showModal && (
-          <Modal onClose={this.toggleModal}>
-            <Character items={items} onClose={this.toggleModal} />
-          </Modal>
-        )}
-        {loading && <p>...loading</p>}
-        {error && <p>Failed to get information. Try again later.</p>}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <CharactersSearchForm onSubmit={onSearch} />
+      {isCharacters && (
+        <CharactersList
+          items={items}
+          onDelete={deleteCharacter}
+          onOpen={toggleModal}
+        />
+      )}
+      {showModal && (
+        <Modal onClose={toggleModal}>
+          <Character items={items} onClose={toggleModal} />
+        </Modal>
+      )}
+      {loading && <p>...loading</p>}
+      {error && <p>Failed to get information. Try again later.</p>}
+    </div>
+  );
+};
 
 export default CharactersSearch;

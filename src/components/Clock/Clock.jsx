@@ -1,30 +1,22 @@
-import { Component } from "react";
+import { useState, useEffect, useRef } from "react";
 import css from "./Clock.module.css";
 
-class Clock extends Component {
-  state = {
-    time: new Date().toLocaleTimeString(),
-  };
+const Clock = () => {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
 
-  intervalId = null;
+  let intervalId = useRef(null);
 
-  componentDidMount() {
-    this.intervalId = setInterval(
-      () =>
-        this.setState({
-          time: new Date().toLocaleTimeString(),
-        }),
+  useEffect(() => {
+    intervalId = setInterval(
+      () => setTime(new Date().toLocaleTimeString()),
       1000
     );
-  }
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-
-  render() {
-    return <div className={css.clockFace}>{this.state.time}</div>;
-  }
-}
+  return <div className={css.clockFace}>{this.state.time}</div>;
+};
 
 export default Clock;
