@@ -9,7 +9,7 @@ import { ReactComponent as AddIcon } from "../../icons/add.svg";
 import { TiUserAdd } from "react-icons/ti";
 import { nanoid } from "nanoid";
 import ContactFormWithFormik from "./ContactFormWithFormik/ContactFormWithFormik";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import useLocalStorage from "../../hooks/useLocalStorageBL";
 import css from "./PhoneBook.module.css";
 
 const PhoneBook = () => {

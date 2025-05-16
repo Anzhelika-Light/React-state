@@ -196,7 +196,7 @@ class App extends Component {
         {/* <Vote /> */}
         {/* <Books /> */}
         {/* <Feedback /> */}
-        <PhoneBook showModal={showModal} onClose={this.toggleModal} />
+        {/* <PhoneBook showModal={showModal} onClose={this.toggleModal} /> */}
         {/* <AccordionItem /> */}
         {/* <AccordionOption1 accordionItems={accordionItems} /> */}
         {/* <AccordionOption2 accordionItems={accordionItems} /> */}
@@ -221,7 +221,7 @@ class App extends Component {
         {/* <Albums /> */}
         {/* <CharactersSearch /> */}
         {/* <Users /> */}
-        {/* <ImageGalleryApp /> */}
+        <ImageGalleryApp />
         {/* <GoodsListApp /> */}
         {/* <SignupForm /> */}
         {/* <Clock /> */}
