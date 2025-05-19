@@ -51,6 +51,8 @@ import Friends from "./components/HOOKS/Friends/Friends";
 import News from "./components/HOOKS/News/News";
 import MainApp from "./components/HOOKS/Context/MainApp";
 
+import Menu from "./modules/Menu";
+
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
 import accordionItems from "./data/accordion.json";
@@ -166,11 +168,10 @@ class App extends Component {
       <>
         {/* <Counter initialValue={10} /> */}
         {/* <Counter /> HOOKS */}
-        <Dropdown />
+        {/* <Dropdown /> */}
         {/* <ColorPicker options={colorPickerOptions} /> */}
         {/* <Form onSubmit={this.onSubmitHandler} />*/}
         {/* TODOS */}
-
         {/* <div>
           <p>General number of todos: {totalTodoCount}</p>
           <p>Done todos: {completedTodoCount}</p>
@@ -190,7 +191,6 @@ class App extends Component {
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted}
         /> */}
-
         {/* <Menu items={menuItems} /> */}
         {/* <ToggleButton text="Click me!" /> */}
         {/* <Vote /> */}
@@ -230,6 +230,8 @@ class App extends Component {
         {/* <Friends /> */}
         {/* <News /> */}
         {/* <MainApp /> */}
+        {/* REACT ROUTER */}
+        <Menu /> {/*from src/modules*/}
       </>
     );
   }
