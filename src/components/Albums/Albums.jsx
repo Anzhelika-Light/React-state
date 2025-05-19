@@ -17,7 +17,6 @@ const Albums = () => {
         setLoading(true);
         const data = await getAlbums(page);
         setItems((prevItems) => [...prevItems, ...data]);
-        // this.setState(({ items }) => ({ items: [...items, ...data] }));
       } catch (error) {
         setError(error.message);
       } finally {
@@ -52,71 +51,5 @@ const Albums = () => {
     </div>
   );
 };
-
-// class Albums extends Component {
-//   state = {
-//     items: [],
-//     page: 1,
-//     isLoading: false,
-//     error: null,
-//   };
-
-//   componentDidMount() {
-//     this.fetchPosts();
-//   }
-
-//   componentDidUpdate(_, prevState) {
-//     const { page } = this.state;
-//     if (prevState.page !== page) {
-//       this.fetchPosts();
-//     }
-//   }
-
-//   async fetchPosts() {
-//     const { page } = this.state;
-//     this.setState({ isLoading: true });
-
-//     try {
-//       const data = await getAlbums(page);
-//       this.setState(({ items }) => ({ items: [...items, ...data] }));
-//     } catch (error) {
-//       this.setState({ error: error.message });
-//     } finally {
-//       this.setState({ isLoading: false });
-//     }
-//   }
-
-//   loadMore = () => {
-//     this.setState(({ page }) => ({
-//       page: page + 1,
-//     }));
-//   };
-
-//   render() {
-//     const { items, isLoading, error } = this.state;
-//     const { loadMore } = this;
-
-//     const elements = items.map(({ id, title }) => (
-//       <li key={id} className={css.item}>
-//         <p>{id}</p>
-//         {title}
-//       </li>
-//     ));
-
-//     return (
-//       <div>
-//         <h2 className={css.title}>Albums</h2>
-//         <ul className={css.list}>{elements}</ul>
-//         {isLoading && <p>...loading</p>}
-//         {error && <p>Failed to get albums. Try again later.</p>}
-//         {Boolean(items.length) && (
-//           <button type="button" onClick={loadMore}>
-//             Load more
-//           </button>
-//         )}
-//       </div>
-//     );
-//   }
-// }
 
 export default Albums;

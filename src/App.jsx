@@ -166,7 +166,7 @@ class App extends Component {
       <>
         {/* <Counter initialValue={10} /> */}
         {/* <Counter /> HOOKS */}
-        {/* <Dropdown /> */}
+        <Dropdown />
         {/* <ColorPicker options={colorPickerOptions} /> */}
         {/* <Form onSubmit={this.onSubmitHandler} />*/}
         {/* TODOS */}
@@ -218,7 +218,7 @@ class App extends Component {
         {/* <FormsWithFormik /> */}
         {/* <PostSearch /> */}
         {/* <Posts /> */}
-        <Albums />
+        {/* <Albums /> */}
         {/* <CharactersSearch /> */}
         {/* <Users /> */}
         {/* <ImageGalleryApp /> */}
