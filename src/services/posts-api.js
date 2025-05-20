@@ -12,6 +12,11 @@ export const getPosts = async (_page = 1) => {
   return data;
 };
 
+export const getSinglePost = async (id) => {
+  const { data } = await instance.get(`/${id}`);
+  return data;
+};
+
 export const searchPosts = async (q, _page = 1) => {
   const { data } = await instance.get("/", {
     params: { q, _page },

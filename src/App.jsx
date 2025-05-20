@@ -12,7 +12,7 @@ import Form from "./components/Form";
 import TodoList from "./components/Todo/TodoList";
 import TodoEditor from "./components/Todo/TodoEditor";
 import Filter from "./components/Todo/TodoFilter";
-import Menu from "./components/Menu";
+// import Menu from "./components/Menu";
 import ToggleButton from "./components/ToggleButton";
 import Vote from "./components/Vote";
 import Books from "./components/Books";
@@ -51,7 +51,7 @@ import Friends from "./components/HOOKS/Friends/Friends";
 import News from "./components/HOOKS/News/News";
 import MainApp from "./components/HOOKS/Context/MainApp";
 
-import Menu from "./modules/Menu";
+import MenuApp from "./modules/MenuApp";
 
 import menuItems from "./data/menuItems.json";
 import initialTodos from "./data/todos.json";
@@ -231,7 +231,7 @@ class App extends Component {
         {/* <News /> */}
         {/* <MainApp /> */}
         {/* REACT ROUTER */}
-        <Menu /> {/*from src/modules*/}
+        <MenuApp /> {/*from src/modules*/}
       </>
     );
   }
