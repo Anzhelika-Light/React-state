@@ -23,3 +23,16 @@ export const searchPosts = async (q, _page = 1) => {
   });
   return data;
 };
+
+// for modules/PostsSearchPage
+export const searchingPosts = async (q) => {
+  const { data } = await instance.get("/", {
+    params: { q },
+  });
+  return data;
+};
+
+export const getPostComments = async (id) => {
+  const { data } = await instance.get(`/${id}/comments`);
+  return data;
+};

@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
-import PostList from "../PostList/PostList";
-import { getPosts } from "../../services/posts-api";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { getPostComments } from "../../services/posts-api";
+import css from "../pages.module.css";
 
-const Posts = () => {
+const SinglePostCommentsPage = () => {
   const [state, setState] = useState({
     items: [],
     loading: false,
     error: null,
   });
+
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -18,11 +22,11 @@ const Posts = () => {
           error: null,
         }));
 
-        const result = await getPosts();
+        const result = await getPostComments(id);
         setState((prevState) => {
           return {
             ...prevState,
-            items: [...prevState.items, ...result],
+            items: result,
           };
         });
       } catch (error) {
@@ -43,15 +47,22 @@ const Posts = () => {
     fetchPosts();
   }, [setState]);
 
-  const { items, loading, error } = state;
+  const { items } = state;
+
+  const elements = items.map(({ id, name, email, body }) => (
+    <li key={id}>
+      <p>
+        Name: {name}. Email: {email}
+        {body}
+      </p>
+    </li>
+  ));
 
   return (
-    <div>
-      {items.length > 0 && <PostList items={items} />}
-      {loading && <p>...loading</p>}
-      {error && <p>Failed to load posts</p>}
+    <div className={css.container}>
+      <ul>{elements}</ul>
     </div>
   );
 };
 
-export default Posts;
+export default SinglePostCommentsPage;

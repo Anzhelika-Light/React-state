@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
 import { getSinglePost } from "../../services/posts-api";
 import css from "../pages.module.css";
 
@@ -11,6 +11,7 @@ const SinglePostPage = () => {
   });
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -46,12 +47,17 @@ const SinglePostPage = () => {
     fetchPosts();
   }, [setState]);
 
+  const goBack = () => navigate(-1);
+
   const { title, body } = state.item;
 
   return (
     <div className={css.container}>
+      <button onClick={goBack}>Go back</button>
       <h2>{title}</h2>
       <p>{body}</p>
+      <Link to={`/posts/${id}/comments`}>Comments</Link>
+      <Outlet />
     </div>
   );
 };
