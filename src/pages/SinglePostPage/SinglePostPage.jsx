@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { getSinglePost } from "../../services/posts-api";
 import css from "../pages.module.css";
 
@@ -12,6 +18,10 @@ const SinglePostPage = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const from = location.state?.from || "/posts";
+  console.log(location);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -47,7 +57,7 @@ const SinglePostPage = () => {
     fetchPosts();
   }, [setState]);
 
-  const goBack = () => navigate(-1);
+  const goBack = () => navigate(from);
 
   const { title, body } = state.item;
 
@@ -56,7 +66,9 @@ const SinglePostPage = () => {
       <button onClick={goBack}>Go back</button>
       <h2>{title}</h2>
       <p>{body}</p>
-      <Link to={`/posts/${id}/comments`}>Comments</Link>
+      <Link state={{ from }} to={`/posts/${id}/comments`}>
+        Comments
+      </Link>
       <Outlet />
     </div>
   );
