@@ -1,10 +1,14 @@
-import { NavLink, Routes, Route } from "react-router-dom";
-import Home from "../pagesRepeta/Home";
-import Dogs from "../pagesRepeta/Dogs";
-import DogDetails from "../pagesRepeta/DogDetails";
-import Layout from "./Layout";
-import { Gallery } from "./Gallery";
-import { Subbreeds } from "./Subbreeds";
+import { Routes, Route } from "react-router-dom";
+import { lazy } from "react";
+
+import { Layout } from "./Layout";
+
+// import Home from "../pagesRepeta/Home";
+const Home = lazy(() => import("../pagesRepeta/Home"));
+const Dogs = lazy(() => import("../pagesRepeta/Dogs"));
+const DogDetails = lazy(() => import("../pagesRepeta/DogDetails"));
+const Gallery = lazy(() => import("./Gallery"));
+const Subbreeds = lazy(() => import("./Subbreeds"));
 
 export const NewApp = () => {
   return (

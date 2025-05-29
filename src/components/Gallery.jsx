@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-export const Gallery = () => {
+const Gallery = () => {
   const { dogId } = useParams();
 
   //   useEffect(()=>{
@@ -9,3 +9,5 @@ export const Gallery = () => {
 
   return <div>Image gallery: {dogId}</div>;
 };
+
+export default Gallery;
