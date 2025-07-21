@@ -4,6 +4,8 @@ import "./App.css";
 
 import MenuApp from "./modules/MenuApp";
 import { NewApp } from "./components/NewApp";
+import Site from "./components/Ex1_Site";
+import SWCharacters from "./components/Ex2_SWCharacters";
 
 import "./App.css";
 
@@ -20,8 +22,11 @@ class App extends Component {
   render() {
     return (
       <>
-        <NewApp />
+        {/* <NewApp /> */}
+
         {/* <MenuApp />  */}
+        {/* <Site /> */}
+        <SWCharacters />
       </>
     );
   }
