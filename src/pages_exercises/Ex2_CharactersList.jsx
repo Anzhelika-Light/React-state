@@ -45,7 +45,10 @@ const CharactersList = () => {
 
   const elements = visibleCharacters.map((item) => (
     <li key={item.name}>
-      <Link to={`${item.url.slice(30)}`}>{item.name}</Link>
+      <p>
+        {item.name}
+        <Link to={`${item.url.slice(30)}`}>Details</Link>
+      </p>
     </li>
   ));
 

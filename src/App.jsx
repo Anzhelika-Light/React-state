@@ -25,8 +25,8 @@ class App extends Component {
         {/* <NewApp /> */}
 
         {/* <MenuApp />  */}
-        {/* <Site /> */}
-        <SWCharacters />
+        <Site />
+        {/* <SWCharacters /> */}
       </>
     );
   }
