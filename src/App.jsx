@@ -6,6 +6,7 @@ import MenuApp from "./modules/MenuApp";
 import { NewApp } from "./components/NewApp";
 import Site from "./components/Ex1_Site";
 import SWCharacters from "./components/Ex2_SWCharacters";
+import ProductsList from "./pages_exercises/Ex3_ProductsList";
 
 import "./App.css";
 
@@ -24,9 +25,10 @@ class App extends Component {
       <>
         {/* <NewApp /> */}
 
-        {/* <MenuApp />  */}
-        <Site />
+        {/* <MenuApp /> */}
+        {/* <Site /> */}
         {/* <SWCharacters /> */}
+        <ProductsList />
       </>
     );
   }

@@ -71,6 +71,8 @@ const CharacterDetails = () => {
           <b>Skin color:</b>
           {skin_color}
         </p>
+        {error && <p>Failed to download character. Try again later.</p>}
+        {loading && <p>...loading</p>}
       </div>
     </>
   );
