@@ -25,32 +25,35 @@ const ProductsList = () => {
         setLoading(false);
       }
     };
-    fetchProducts(page);
+    fetchProducts();
   }, [page]);
 
   //   const loadMore = () => {
   //     setSearchParams((page) => page + 1);
   //   };
 
-  const updateQueryString = (e) => {
-    const characterIdValue = e.target.value;
-    if (characterIdValue === "") {
-      return setSearchParams({});
-    }
-    setSearchParams({ name: e.target.value });
-  };
-  const elements = items.map(({ name, id }) => <li key={id}>{name}</li>);
+  // const updateQueryString = (e) => {
+  //   const characterIdValue = e.target.value;
+  //   if (characterIdValue === "") {
+  //     return setSearchParams({});
+  //   }
+  //   setSearchParams({ name: e.target.value });
+  // };
 
+  const elements = items.map(({ name, id }) => <li key={id}>{name}</li>);
+  const visible = page < items.length;
   return (
     <>
       <ul>{elements}</ul>
-      <button
-        type="button"
-        // onClick={loadMore}
-        onClick={() => setSearchParams({ page: Number(page) + Number(1) })}
-      >
-        Load more
-      </button>
+      {visible && (
+        <button
+          type="button"
+          // onClick={loadMore}
+          onClick={() => setSearchParams({ page: Number(page) + Number(1) })}
+        >
+          Load more
+        </button>
+      )}
     </>
   );
 };
