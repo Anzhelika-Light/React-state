@@ -1,28 +1,15 @@
-import { Suspense } from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import styled from "styled-components";
-
-const StyledLink = styled(NavLink)`
-  color: #212121;
-  &.active {
-    color: orangered;
-  }
-`;
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "../redux/store";
 
 export const Layout = () => {
+  const dispatch = useDispatch();
+  const value = useSelector((state) => state.myValue);
+
   return (
     <div>
-      <header>
-        <nav>
-          <StyledLink to="/">Home</StyledLink>
-          <StyledLink to="/dogs">Collection</StyledLink>
-        </nav>
-      </header>
-      <main>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
-      </main>
+      {value}
+      <button onClick={() => dispatch(increment(100))}>Increment</button>
+      <button onClick={() => dispatch(decrement(50))}>Decrement</button>
     </div>
   );
 };
