@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "server": "json-server --watch db.json --port 4040",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -15,6 +16,8 @@
     "axios": "^1.8.3",
     "classnames": "^2.5.1",
     "formik": "^2.4.6",
+    "json-server": "^1.0.0-beta.12",
+    "modern-normalize": "^3.0.1",
     "nanoid": "^5.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -25,6 +28,7 @@
     "react-spinners": "^0.15.0",
     "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
+    "slugify": "^1.6.6",
     "styled-components": "^6.1.15",
     "vite-plugin-svgr": "^4.3.0",
     "yup": "^1.6.1"
